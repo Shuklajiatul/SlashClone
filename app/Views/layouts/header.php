@@ -55,7 +55,7 @@
                             <a class="dropdown-item" href="/users">User</a>
                             <a class="dropdown-item" href="#">Access Level</a>
                             <a class="dropdown-item" href="/campaigns">Campaign</a>
-                            <a class="dropdown-item" href="#">Chat</a>
+<a class="dropdown-item" href="/chat">Chat</a>
                         </div>
                     </th>
                     <th scope="col" class="border-0">

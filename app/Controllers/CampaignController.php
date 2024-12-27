@@ -15,22 +15,13 @@ class CampaignController extends BaseController
 
     public function index()
     {
-        // $data['pager'] = $this->campaignModel->pager; // Add pager to the data
-        // $data['campaigns'] = $this->campaignModel->paginate(2); // Use paginate() with 2 items per page
-        // return view('campaign/index', $data);
 
-        $data['campaigns'] = $this->campaignModel->paginate(2);
-
-        $users = $this->campaignModel->paginate(2);
+        $campaigns = $this->campaignModel->paginate(2);
         $data['viewpage'] = '/campaign/index';
-        $data['data'] = ['users' => $users];
-        // $data['users'] = $this->userModel->paginate($perPage);
-        // $pager = $this->userModel->pager; // Get the pager instance
+        $data['data'] = ['campaigns' => $campaigns];
         $data['pager'] = $this->campaignModel->pager;
-        // log_message('info', 'Users retrieved: ' . json_encode($users));
-        return view('template2', $data);
-        
-        
+        return view('template', $data);
+    
     }
 
     public function create()
@@ -47,7 +38,7 @@ class CampaignController extends BaseController
             'start_date' => $this->request->getPost('start_date'),
             'end_date' => $this->request->getPost('end_date'),
         ]);
-        return redirect()->to('/campaigns')->with('success', 'Campaign created successfully!'); // Updated redirect
+        return redirect()->to('/campaigns')->with('success', 'Campaign created successfully!');
     }
 
     public function edit($id)
@@ -66,12 +57,28 @@ class CampaignController extends BaseController
             'start_date' => $this->request->getPost('start_date'),
             'end_date' => $this->request->getPost('end_date'),
         ]);
-        return redirect()->to('/campaigns')->with('success', 'Campaign updated successfully!'); // Updated redirect
+        return redirect()->to('/campaigns')->with('success', 'Campaign updated successfully!');
+    }
+
+    public function filter()
+    {
+        $filterData = $this->request->getPost();
+        $campaigns = $this->campaignModel->like('id', $filterData['filterId'])
+                                          ->like('campaign_name', $filterData['filterName'] . '%')
+                                          ->like('process', $filterData['filterProcess'] . '%')
+                                          ->like('active', $filterData['filterActive'] . '%')
+                                          ->paginate(2);
+        $data['viewpage'] = '/campaign/index';
+        $data['data'] = ['campaigns' => $campaigns];
+        $data['pager'] = $this->campaignModel->pager;
+        return view('template', $data);
+
+       
     }
 
     public function delete($id)
     {
         $this->campaignModel->delete($id);
-        return redirect()->to('/campaigns')->with('success', 'Campaign deleted successfully!'); // Updated redirect
+        return redirect()->to('/campaigns')->with('success', 'Campaign deleted successfully!');
     }
 }

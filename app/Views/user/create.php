@@ -13,7 +13,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <input type="text" name="email" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone</label>

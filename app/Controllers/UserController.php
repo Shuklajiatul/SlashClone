@@ -13,13 +13,28 @@ class UserController extends BaseController
         $this->userModel = new UserModel();
     }
 
+    public function filter()
+    {
+        $filterData = $this->request->getPost();
+$users = $this->userModel->like('id', $filterData['filterId'])
+                          ->like('name', $filterData['filterName'] . '%')
+                          ->like('email', $filterData['filterEmail'] . '%')
+                          ->like('phone', $filterData['filterPhone'] . '%')
+                          ->like('role', $filterData['filterRole'] . '%')
+                          ->paginate(2);
+        $data['viewpage'] = '/user/index';
+        $data['data'] = ['users' => $users];  
+        $data['pager'] = $this->userModel->pager;
+        return view('template', $data);
+    }
+
     public function index()
     {
         $users = $this->userModel->paginate(2);
         $data['viewpage'] = '/user/index';
         $data['data'] = ['users' => $users];
         $data['pager'] = $this->userModel->pager;
-        return view('template2', $data);
+        return view('template', $data);
     }
 
     public function create()

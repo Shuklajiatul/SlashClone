@@ -1,5 +1,5 @@
 <?php
-echo view('header');
-echo view('index');
-echo view('footer');
+echo view('layouts/header');
+echo view($viewpage, $data);
+echo view('layouts/footer');
 ?>

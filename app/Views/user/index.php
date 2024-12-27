@@ -26,7 +26,7 @@
 <div class="container">
     <h2 class="my-4 text-center text-dark">User List</h2>
     <a href="/users/create" class="btn btn-primary mb-3">Add User</a>
-    <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#filterModal">Filter</a>
+    <a href="/users/filter" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#filterModal">Filter</a>
     <?php if (session()->getFlashdata('success')): ?>
         <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
     <?php endif; ?>
@@ -75,7 +75,7 @@
 </nav>
 </div>
 
-<!-- Modal from filter.php -->
+<!-- Include the filter modal -->
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -97,7 +97,7 @@
                     </div>
                     <div class="form-group">
                         <label for="filterEmail">Filter by Email</label>
-                        <input type="email" class="form-control" id="filterEmail" name="filterEmail">
+                        <input type="text" class="form-control" id="filterEmail" name="filterEmail">
                     </div>
                     <div class="form-group">
                         <label for="filterPhone">Filter by Phone</label>

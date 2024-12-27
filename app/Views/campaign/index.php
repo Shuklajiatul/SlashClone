@@ -1,4 +1,3 @@
-
 <style>
     .pagination {
         margin-top: 20px;
@@ -27,6 +26,7 @@
 <div class="container">
     <h2 class="my-4 text-center text-dark">Campaigns List</h2>
     <a href="<?= base_url('campaigns/create') ?>" class="btn btn-primary mb-3">Add Campaign</a>
+    <a href="" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#filterModal">Filter</a>
     <?php if (session()->getFlashdata('success')): ?>
         <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
     <?php endif; ?>
@@ -73,3 +73,41 @@
     </nav>
 </div>
 
+<!-- Include the filter modal -->
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filter Campaigns</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="filterForm" method="POST" action="/campaigns/filter">
+                    <div class="form-group">
+                        <label for="filterId">Filter by ID</label>
+                        <input type="text" class="form-control" id="filterId" name="filterId">
+                    </div>
+                    <div class="form-group">
+                        <label for="filterName">Filter by Campaign Name</label>
+                        <input type="text" class="form-control" id="filterName" name="filterName">
+                    </div>
+                    <div class="form-group">
+                        <label for="filterProcess">Filter by Process</label>
+                        <input type="text" class="form-control" id="filterProcess" name="filterProcess">
+                    </div>
+                    <div class="form-group">
+                        <label for="filterActive">Filter by Active Status</label>
+                        <select class="form-control" id="filterActive" name="filterActive">
+                            <option value="">Select</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
